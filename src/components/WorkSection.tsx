@@ -23,23 +23,50 @@ type WorkSectionProps = {
   variant?: "primary" | "secondary";
 };
 
-function objectPositionClass(project: WorkItem): string {
+function mediaObjectClass(project: WorkItem): string {
   if (project.imageFit === "contain") return "object-contain object-center";
   if (project.imageAnchor === "left") return "object-cover object-left-top";
   if (project.imagePosition === "right") return "object-cover object-right-top";
   return "object-cover object-top";
 }
 
+/** Contained media frame — no absolute positioning, no bleed. */
+function MediaFrame({
+  children,
+  compact,
+  tinted,
+}: {
+  children: React.ReactNode;
+  compact?: boolean;
+  tinted?: boolean;
+}) {
+  return (
+    <div
+      className={`relative min-h-0 min-w-0 max-w-full overflow-hidden ${
+        tinted ? "bg-canvas-warm" : "bg-white"
+      }`}
+    >
+      <div
+        className={`relative w-full max-w-full overflow-hidden ${
+          compact
+            ? "aspect-[16/10] min-h-[220px] md:min-h-[260px] lg:aspect-auto lg:h-full lg:min-h-0"
+            : "aspect-[16/10] min-h-[280px] md:min-h-[320px] lg:aspect-auto lg:h-full lg:min-h-0"
+        }`}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
 function EditorialCardMedia({ project }: { project: WorkItem }) {
-  const mediaShell =
-    "relative h-full min-h-[280px] w-full overflow-hidden bg-white md:min-h-[320px] lg:min-h-[380px]";
-  const objectClass = objectPositionClass(project);
+  const objectClass = `h-full w-full max-w-full ${mediaObjectClass(project)}`;
 
   if (project.video) {
     return (
-      <div className={mediaShell}>
+      <MediaFrame>
         <video
-          className={`h-full w-full ${objectClass}`}
+          className={objectClass}
           autoPlay
           muted
           loop
@@ -50,65 +77,61 @@ function EditorialCardMedia({ project }: { project: WorkItem }) {
         >
           <source src={project.video} type="video/mp4" />
         </video>
-      </div>
+      </MediaFrame>
     );
   }
 
   if (project.image) {
     return (
-      <div className={mediaShell}>
+      <MediaFrame>
         <SharpImage
           src={project.image}
           alt=""
-          fill
+          width={1600}
+          height={900}
           unoptimized={project.imageUnoptimized}
           quality={project.imageUnoptimized ? undefined : 90}
           className={objectClass}
           sizes={project.imageSizes ?? "(max-width: 1024px) 100vw, 640px"}
         />
-      </div>
+      </MediaFrame>
     );
   }
 
   if (project.mockup) {
     return (
-      <div
-        className={`${mediaShell} flex items-center justify-center bg-canvas-warm`}
-      >
-        <ProductMockup id={project.mockup} />
-      </div>
+      <MediaFrame tinted>
+        <div className="flex h-full w-full items-center justify-center overflow-hidden p-6">
+          <ProductMockup id={project.mockup} />
+        </div>
+      </MediaFrame>
     );
   }
 
   return null;
 }
 
-function CompactCardMedia({
-  project,
-}: {
-  project: WorkItem;
-}) {
-  const mediaShell =
-    "relative h-full min-h-[220px] w-full overflow-hidden bg-white md:min-h-[260px]";
-
+function CompactCardMedia({ project }: { project: WorkItem }) {
   if (project.cardVideos && project.cardVideos.length > 0) {
     return (
-      <div className={mediaShell}>
-        <CardVideoGallery
-          videos={project.cardVideos}
-          posters={project.cardVideoPosters}
-          compact
-          deviceFrame={project.cardVideoDeviceFrame ?? true}
-        />
-      </div>
+      <MediaFrame compact>
+        <div className="flex h-full w-full items-center justify-center overflow-hidden">
+          <CardVideoGallery
+            videos={project.cardVideos}
+            posters={project.cardVideoPosters}
+            compact
+            deviceFrame={project.cardVideoDeviceFrame ?? true}
+          />
+        </div>
+      </MediaFrame>
     );
   }
 
   if (project.video) {
     return (
-      <div className={mediaShell}>
+      <MediaFrame compact>
         <video
-          className="h-full w-full object-cover object-top"
+          className="h-full w-full max-w-full object-cover object-top"
           autoPlay
           muted
           loop
@@ -119,50 +142,38 @@ function CompactCardMedia({
         >
           <source src={project.video} type="video/mp4" />
         </video>
-      </div>
+      </MediaFrame>
     );
   }
 
   if (project.image) {
     return (
-      <div className={mediaShell}>
+      <MediaFrame compact>
         <SharpImage
           src={project.image}
           alt=""
-          fill
+          width={1600}
+          height={900}
           unoptimized={project.imageUnoptimized}
           quality={project.imageUnoptimized ? undefined : 90}
-          className={objectPositionClass(project)}
+          className={`h-full w-full max-w-full ${mediaObjectClass(project)}`}
           sizes={project.imageSizes ?? "(max-width: 1024px) 100vw, 480px"}
         />
-      </div>
+      </MediaFrame>
     );
   }
 
   if (project.mockup) {
     return (
-      <div
-        className={`${mediaShell} flex items-center justify-center bg-canvas-warm`}
-      >
-        <ProductMockup id={project.mockup} />
-      </div>
+      <MediaFrame compact tinted>
+        <div className="flex h-full w-full items-center justify-center overflow-hidden p-4">
+          <ProductMockup id={project.mockup} />
+        </div>
+      </MediaFrame>
     );
   }
 
   return null;
-}
-
-function CardVisual({
-  project,
-  compact,
-}: {
-  project: WorkItem;
-  compact?: boolean;
-}) {
-  if (compact) {
-    return <CompactCardMedia project={project} />;
-  }
-  return <EditorialCardMedia project={project} />;
 }
 
 function ShowcaseCard({
@@ -175,31 +186,27 @@ function ShowcaseCard({
   const router = useRouter();
   const [gateOpen, setGateOpen] = useState(false);
 
-  const content = (
+  const cardInner = (
     <article
-      className={`showcase-card group isolate overflow-hidden rounded-2xl border bg-surface transition-shadow duration-300 ${
+      className={`showcase-card group isolate w-full min-w-0 max-w-full overflow-hidden rounded-2xl border bg-surface transition-shadow duration-300 ${
         compact
           ? "border-border/60 shadow-none hover:shadow-[0_8px_24px_rgba(10,10,10,0.04)]"
           : "border-border/80 shadow-[0_8px_30px_rgba(10,10,10,0.04)] hover:shadow-[0_20px_50px_rgba(10,10,10,0.08)]"
       }`}
     >
-      <div className="grid lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-stretch">
+      <div className="grid w-full min-w-0 grid-cols-1 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-stretch">
         <div
-          className={`flex flex-col justify-between ${
+          className={`min-w-0 ${
             compact ? "p-6 md:p-8 lg:p-9" : "p-8 md:p-10 lg:p-12"
-          }`}
+          } flex flex-col justify-between`}
           style={{ backgroundColor: project.tint ?? "#fafafa" }}
         >
-          <div>
-            <p
-              className={`font-medium text-ink ${compact ? "text-sm" : "text-sm"}`}
-            >
-              {project.category}
-            </p>
+          <div className="min-w-0">
+            <p className="text-sm font-medium text-ink">{project.category}</p>
             <h3
-              className={`mt-4 font-medium leading-tight tracking-tight text-ink ${
+              className={`font-medium leading-tight tracking-tight text-ink ${
                 compact
-                  ? "text-xl md:text-[1.375rem]"
+                  ? "mt-4 text-xl md:text-[1.375rem]"
                   : "mt-5 text-[1.625rem] md:text-[1.75rem]"
               }`}
             >
@@ -231,8 +238,13 @@ function ShowcaseCard({
             </span>
           ) : null}
         </div>
-        <div className="relative min-h-0 overflow-hidden">
-          <CardVisual project={project} compact={compact} />
+
+        <div className="min-h-0 min-w-0 max-w-full">
+          {compact ? (
+            <CompactCardMedia project={project} />
+          ) : (
+            <EditorialCardMedia project={project} />
+          )}
         </div>
       </div>
     </article>
@@ -244,9 +256,9 @@ function ShowcaseCard({
         <button
           type="button"
           onClick={() => setGateOpen(true)}
-          className="block w-full cursor-pointer text-left"
+          className="block w-full min-w-0 cursor-pointer overflow-hidden rounded-2xl text-left"
         >
-          {content}
+          {cardInner}
         </button>
         <PasswordGateModal
           open={gateOpen}
@@ -270,14 +282,14 @@ function ShowcaseCard({
         {...(isExternal
           ? { target: "_blank", rel: "noopener noreferrer" }
           : {})}
-        className="block"
+        className="block w-full min-w-0 overflow-hidden rounded-2xl"
       >
-        {content}
+        {cardInner}
       </Link>
     );
   }
 
-  return content;
+  return cardInner;
 }
 
 export function WorkSection({
@@ -306,10 +318,16 @@ export function WorkSection({
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-60px" }}
-        className={`flex flex-col ${isSecondary ? "mt-10 gap-6" : "mt-14 gap-8 md:gap-10"}`}
+        className={`flex min-w-0 flex-col ${
+          isSecondary ? "mt-10 gap-6" : "mt-14 gap-8 md:gap-10"
+        }`}
       >
         {items.map((project) => (
-          <motion.div key={project.title} variants={staggerItem}>
+          <motion.div
+            key={project.title}
+            variants={staggerItem}
+            className="min-w-0 max-w-full overflow-hidden"
+          >
             <ShowcaseCard project={project} compact={isSecondary} />
           </motion.div>
         ))}

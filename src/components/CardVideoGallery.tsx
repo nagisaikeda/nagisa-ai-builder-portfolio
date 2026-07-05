@@ -74,9 +74,9 @@ export function CardVideoGallery({
 
   return (
     <div
-      className={`flex min-h-[200px] self-stretch items-center justify-center bg-white px-4 py-6 sm:px-6 md:px-8 ${minH}`}
+      className={`flex h-full min-h-0 w-full max-w-full items-center justify-center overflow-hidden bg-white px-4 py-6 sm:px-6 md:px-8 ${minH}`}
     >
-      <div className="flex w-full max-w-[400px] flex-col items-center justify-center gap-4 sm:max-w-none sm:flex-row sm:gap-5">
+      <div className="flex w-full max-w-full flex-col items-center justify-center gap-4 overflow-hidden sm:flex-row sm:gap-5">
         {videos.slice(0, 2).map((src, index) => (
           <CardVideo
             key={src}
