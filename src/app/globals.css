@@ -1,26 +1,130 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ink: #0a0a0a;
+  --ink-soft: #171717;
+  --body: #525252;
+  --muted: #737373;
+  --muted-soft: #a3a3a3;
+  --border: #e5e5e5;
+  --border-strong: #d4d4d4;
+  --canvas: #f5f5f5;
+  --canvas-warm: #fafafa;
+  --surface: #ffffff;
+  --accent: #8f6b4f;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-body: var(--body);
+  --color-muted: var(--muted);
+  --color-muted-soft: var(--muted-soft);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-canvas: var(--canvas);
+  --color-canvas-warm: var(--canvas-warm);
+  --color-surface: var(--surface);
+  --color-accent: var(--accent);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-instrument-serif);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--canvas);
+  color: var(--body);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.6;
+  letter-spacing: -0.011em;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--canvas-warm);
+}
+
+.text-hero-headline {
+  font-size: clamp(2rem, 4.2vw, 3.25rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+}
+
+.text-section-serif {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+  font-size: clamp(1.375rem, 2vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  color: var(--ink);
+}
+
+.text-section-sans {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+
+.text-card-title {
+  font-size: 1.625rem;
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: var(--ink);
+}
+
+.showcase-card {
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.text-label {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.text-mono-sm {
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.text-nav {
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--body);
+}
+
+.font-serif-brand {
+  font-family: var(--font-instrument-serif), Georgia, serif;
+}
+
+.artwork-grain {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.ui-window {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow:
+    0 24px 48px rgba(10, 10, 10, 0.08),
+    0 4px 12px rgba(10, 10, 10, 0.04);
 }
