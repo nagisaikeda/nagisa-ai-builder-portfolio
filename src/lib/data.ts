@@ -115,7 +115,6 @@ export const aiProducts = {
       href: "/projects/readylead",
       image: "/images/projects/readylead/dashboard.png",
       imageAnchor: "left",
-      imageZoom: 1.08,
       tint: "#f3f1ee",
     },
     {

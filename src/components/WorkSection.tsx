@@ -23,40 +23,23 @@ type WorkSectionProps = {
   variant?: "primary" | "secondary";
 };
 
-function CardVisual({
-  project,
-  compact,
-}: {
-  project: WorkItem;
-  compact?: boolean;
-}) {
-  const minH = compact ? "md:min-h-[300px]" : "md:min-h-[380px]";
-  const zoom = project.imageZoom ?? 1;
-  const anchor = project.imageAnchor ?? "center";
-  const zoomOrigin = anchor === "left" ? "top left" : "top center";
-  const coverClass =
-    anchor === "left"
-      ? "object-cover object-left object-top"
-      : "object-cover object-top";
+function objectPositionClass(project: WorkItem): string {
+  if (project.imageFit === "contain") return "object-contain object-center";
+  if (project.imageAnchor === "left") return "object-cover object-left-top";
+  if (project.imagePosition === "right") return "object-cover object-right-top";
+  return "object-cover object-top";
+}
 
-  if (project.cardVideos && project.cardVideos.length > 0) {
-    return (
-      <CardVideoGallery
-        videos={project.cardVideos}
-        posters={project.cardVideoPosters}
-        compact={compact}
-        deviceFrame={project.cardVideoDeviceFrame ?? true}
-      />
-    );
-  }
+function EditorialCardMedia({ project }: { project: WorkItem }) {
+  const mediaShell =
+    "relative h-full min-h-[280px] w-full overflow-hidden bg-white md:min-h-[320px] lg:min-h-[380px]";
+  const objectClass = objectPositionClass(project);
 
   if (project.video) {
     return (
-      <div
-        className={`relative min-h-[240px] self-stretch overflow-hidden bg-white ${minH}`}
-      >
+      <div className={mediaShell}>
         <video
-          className="absolute inset-0 h-full w-full object-cover object-top"
+          className={`h-full w-full ${objectClass}`}
           autoPlay
           muted
           loop
@@ -72,38 +55,17 @@ function CardVisual({
   }
 
   if (project.image) {
-    const fit = project.imageFit ?? "cover";
-    const objectClass =
-      fit === "contain"
-        ? "object-contain object-center"
-        : project.imagePosition === "right"
-          ? "object-cover object-[right_center] md:!left-auto md:!w-[165%] md:!max-w-none md:object-left"
-          : coverClass;
-
     return (
-      <div
-        className={`relative min-h-[240px] self-stretch overflow-hidden bg-white ${minH}`}
-      >
-        <div
-          className={`absolute inset-0 ${fit === "contain" ? "p-4 md:p-6" : ""}`}
-          style={
-            zoom !== 1 && fit === "cover"
-              ? { transform: `scale(${zoom})`, transformOrigin: zoomOrigin }
-              : undefined
-          }
-        >
-          <SharpImage
-            src={project.image}
-            alt=""
-            fill
-            unoptimized={project.imageUnoptimized}
-            quality={project.imageUnoptimized ? undefined : 90}
-            className={objectClass}
-            sizes={
-              project.imageSizes ?? "(max-width: 1024px) 100vw, 700px"
-            }
-          />
-        </div>
+      <div className={mediaShell}>
+        <SharpImage
+          src={project.image}
+          alt=""
+          fill
+          unoptimized={project.imageUnoptimized}
+          quality={project.imageUnoptimized ? undefined : 90}
+          className={objectClass}
+          sizes={project.imageSizes ?? "(max-width: 1024px) 100vw, 640px"}
+        />
       </div>
     );
   }
@@ -111,7 +73,7 @@ function CardVisual({
   if (project.mockup) {
     return (
       <div
-        className={`relative min-h-[240px] overflow-hidden bg-canvas-warm ${minH}`}
+        className={`${mediaShell} flex items-center justify-center bg-canvas-warm`}
       >
         <ProductMockup id={project.mockup} />
       </div>
@@ -119,6 +81,88 @@ function CardVisual({
   }
 
   return null;
+}
+
+function CompactCardMedia({
+  project,
+}: {
+  project: WorkItem;
+}) {
+  const mediaShell =
+    "relative h-full min-h-[220px] w-full overflow-hidden bg-white md:min-h-[260px]";
+
+  if (project.cardVideos && project.cardVideos.length > 0) {
+    return (
+      <div className={mediaShell}>
+        <CardVideoGallery
+          videos={project.cardVideos}
+          posters={project.cardVideoPosters}
+          compact
+          deviceFrame={project.cardVideoDeviceFrame ?? true}
+        />
+      </div>
+    );
+  }
+
+  if (project.video) {
+    return (
+      <div className={mediaShell}>
+        <video
+          className="h-full w-full object-cover object-top"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={project.videoPoster ?? undefined}
+          aria-hidden
+        >
+          <source src={project.video} type="video/mp4" />
+        </video>
+      </div>
+    );
+  }
+
+  if (project.image) {
+    return (
+      <div className={mediaShell}>
+        <SharpImage
+          src={project.image}
+          alt=""
+          fill
+          unoptimized={project.imageUnoptimized}
+          quality={project.imageUnoptimized ? undefined : 90}
+          className={objectPositionClass(project)}
+          sizes={project.imageSizes ?? "(max-width: 1024px) 100vw, 480px"}
+        />
+      </div>
+    );
+  }
+
+  if (project.mockup) {
+    return (
+      <div
+        className={`${mediaShell} flex items-center justify-center bg-canvas-warm`}
+      >
+        <ProductMockup id={project.mockup} />
+      </div>
+    );
+  }
+
+  return null;
+}
+
+function CardVisual({
+  project,
+  compact,
+}: {
+  project: WorkItem;
+  compact?: boolean;
+}) {
+  if (compact) {
+    return <CompactCardMedia project={project} />;
+  }
+  return <EditorialCardMedia project={project} />;
 }
 
 function ShowcaseCard({
@@ -133,15 +177,13 @@ function ShowcaseCard({
 
   const content = (
     <article
-      className={`showcase-card group overflow-hidden rounded-2xl border bg-surface transition-all duration-300 ${
-        project.cardVideos
-          ? "border-border/60 shadow-[0_8px_24px_rgba(10,10,10,0.04)] hover:scale-[1.01] hover:shadow-[0_24px_56px_rgba(10,10,10,0.1)]"
-          : compact
-            ? "border-border/60 shadow-none hover:shadow-[0_8px_24px_rgba(10,10,10,0.04)]"
-            : "border-border/80 shadow-[0_8px_30px_rgba(10,10,10,0.04)] hover:shadow-[0_20px_50px_rgba(10,10,10,0.08)]"
+      className={`showcase-card group isolate overflow-hidden rounded-2xl border bg-surface transition-shadow duration-300 ${
+        compact
+          ? "border-border/60 shadow-none hover:shadow-[0_8px_24px_rgba(10,10,10,0.04)]"
+          : "border-border/80 shadow-[0_8px_30px_rgba(10,10,10,0.04)] hover:shadow-[0_20px_50px_rgba(10,10,10,0.08)]"
       }`}
     >
-      <div className="grid lg:grid-cols-[minmax(0,0.44fr)_minmax(0,0.56fr)] lg:items-stretch">
+      <div className="grid lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)] lg:items-stretch">
         <div
           className={`flex flex-col justify-between ${
             compact ? "p-6 md:p-8 lg:p-9" : "p-8 md:p-10 lg:p-12"
@@ -189,7 +231,9 @@ function ShowcaseCard({
             </span>
           ) : null}
         </div>
-        <CardVisual project={project} compact={compact} />
+        <div className="relative min-h-0 overflow-hidden">
+          <CardVisual project={project} compact={compact} />
+        </div>
       </div>
     </article>
   );
