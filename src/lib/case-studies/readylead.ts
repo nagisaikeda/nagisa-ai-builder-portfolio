@@ -13,8 +13,8 @@ export const readyleadCaseStudy: CaseStudy = {
   githubLabel: "GitHub",
   backLabel: "Back to AI Work",
   backHref: "/#ai-products",
-  heroImage: "/images/projects/readylead/dashboard.png",
-  heroImageAspect: "1024/657",
+  heroImage: "/images/projects/readylead/building-analysis.png",
+  heroImageAspect: "16/10",
   screenshots: {
     heading: "Product in practice",
     items: [
@@ -25,16 +25,10 @@ export const readyleadCaseStudy: CaseStudy = {
         "Product landing — positioning ReadyLead as an HVAC GTM signal engine for San Francisco.",
     },
     {
-      src: "/images/projects/readylead/dashboard.png",
-      alt: "ReadyLead signals dashboard",
-      caption:
-        "Signals dashboard — ranked opportunities on a live map with category and 311 filters.",
-    },
-    {
       src: "/images/projects/readylead/building-analysis.png",
-      alt: "ReadyLead building analysis detail",
+      alt: "ReadyLead signals dashboard and building analysis",
       caption:
-        "Building analysis — evidence-backed scoring, decision-maker contact, and AI reasoning.",
+        "Signals dashboard — ranked opportunities on a live map with evidence-backed building analysis.",
     },
     {
       src: "/images/projects/readylead/opportunity-ranking.png",

@@ -45,16 +45,12 @@ async function main() {
     clip: await heroSection.boundingBox(),
   });
 
-  // dashboard — signals map overview
+  // building analysis — signals map with selected building detail
   await page.goto(`${BASE}/signals`);
   await page.waitForSelector("text=480 ELLIS ST", { timeout: 20000 });
-  await page.waitForTimeout(3500);
-  await capture(page, "dashboard.png");
-
-  // building analysis — selected building detail
   await page.getByRole("button", { name: /480 ELLIS ST/i }).click();
   await page.waitForSelector("text=Add to Outreach", { timeout: 10000 });
-  await page.waitForTimeout(2000);
+  await page.waitForTimeout(3500);
   await capture(page, "building-analysis.png");
 
   // opportunity ranking — ranked list sidebar

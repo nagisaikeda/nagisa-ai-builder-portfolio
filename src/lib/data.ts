@@ -113,7 +113,7 @@ export const aiProducts = {
       cta: "View case study",
       tags: [] as readonly string[],
       href: "/projects/readylead",
-      image: "/images/projects/readylead/dashboard.png",
+      image: "/images/projects/readylead/building-analysis.png",
       imageAnchor: "left",
       tint: "#f3f1ee",
     },
