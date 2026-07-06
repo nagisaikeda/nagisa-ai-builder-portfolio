@@ -46,13 +46,13 @@ export const site = {
     "2nd Place — YC AI Growth Hackathon",
   ],
   proof:
-    "2nd Place — YC AI Growth Hackathon · Shipped ReadyLead · Built ProbeIQ · Built Local PM OS · Shipped Ahead iOS · Building Ahead Agent",
+    "Shipped ReadyLead · Built ProbeIQ · Built Local PM OS · Shipped Ahead iOS · Building Ahead Agent",
   progression:
     "Enterprise Product Design → AI Product Design → AI Systems → Design Engineering → Founder",
   email: "hello@nagisaikeda.com",
   linkedin: "https://www.linkedin.com/in/nagisaikeda/",
-  resume: "https://nagisaikeda.com/resume",
-  naraLabs: "https://naralabs.com",
+  resume: "/resume/nagisa-ikeda-ai-design-engineer.pdf",
+  naraLabs: "https://www.nara-labs.com/",
   framerWork: "https://nagisaikeda.com/#work",
 } as const;
 
