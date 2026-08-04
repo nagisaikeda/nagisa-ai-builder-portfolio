@@ -6,10 +6,10 @@ import { site } from "@/lib/data";
 import { fadeUp } from "@/lib/motion";
 
 const footerLinks = [
-  { label: "Email", href: `mailto:${site.email}` },
-  { label: "LinkedIn", href: site.linkedin },
-  { label: "Resume", href: site.resume },
-  { label: "Nara Labs", href: site.naraLabs },
+  { label: "Email", href: `mailto:${site.email}`, external: true },
+  { label: "LinkedIn", href: site.linkedin, external: true },
+  { label: "Resume", href: site.resumePage, external: false },
+  { label: "Nara Labs", href: site.naraLabs, external: true },
 ];
 
 export function Footer() {
@@ -34,8 +34,9 @@ export function Footer() {
             <Link
               key={link.label}
               href={link.href}
-              target="_blank"
-              rel="noopener noreferrer"
+              {...(link.external
+                ? { target: "_blank", rel: "noopener noreferrer" }
+                : {})}
               className="text-nav text-ink transition-opacity hover:opacity-60"
             >
               {link.label}

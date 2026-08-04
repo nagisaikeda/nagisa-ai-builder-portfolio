@@ -128,3 +128,57 @@ body {
     0 24px 48px rgba(10, 10, 10, 0.08),
     0 4px 12px rgba(10, 10, 10, 0.04);
 }
+
+@keyframes shipping-check-in {
+  from {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shipping-text-in {
+  from {
+    opacity: 0.42;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.shipping-item-text {
+  opacity: 0.42;
+}
+
+.shipping-item-text--complete {
+  animation: shipping-text-in 0.38s ease 0.14s forwards;
+}
+
+.shipping-check {
+  display: inline-block;
+  min-width: 1ch;
+  opacity: 0;
+  transform: scale(0.82);
+}
+
+.shipping-check--complete {
+  animation: shipping-check-in 0.38s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shipping-item-text,
+  .shipping-item-text--complete {
+    animation: none;
+    opacity: 1;
+  }
+
+  .shipping-check,
+  .shipping-check--complete {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

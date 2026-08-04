@@ -1,11 +1,13 @@
-import { Capabilities } from "@/components/Capabilities";
 import { BuildLog } from "@/components/BuildLog";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
+import { ResumeSection } from "@/components/ResumeSection";
+import { WhatIBring } from "@/components/WhatIBring";
 import {
   FeaturedAIProducts,
-  ProductDesignWork,
+  MoreAiProductsSection,
+  ProductDesignSection,
 } from "@/components/WorkSections";
 
 export default function Home() {
@@ -15,9 +17,11 @@ export default function Home() {
       <main>
         <Hero />
         <FeaturedAIProducts />
-        <ProductDesignWork />
+        <MoreAiProductsSection />
+        <ProductDesignSection />
+        <WhatIBring />
+        <ResumeSection />
         <BuildLog />
-        <Capabilities />
       </main>
       <Footer />
     </>

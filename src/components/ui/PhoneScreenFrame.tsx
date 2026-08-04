@@ -20,7 +20,7 @@ export function PhoneScreenFrame({
 }: PhoneScreenFrameProps) {
   return (
     <figure
-      className={`relative shrink-0 overflow-hidden bg-white shadow-[0_6px_28px_rgba(10,10,10,0.06)] ${className ?? ""}`}
+      className={`relative shrink-0 overflow-hidden bg-white shadow-[0_2px_8px_rgba(10,10,10,0.04),0_12px_40px_rgba(10,10,10,0.08),0_32px_64px_rgba(10,10,10,0.05)] ${className ?? ""}`}
       style={{
         height,
         aspectRatio: `${SCREEN_WIDTH} / ${SCREEN_HEIGHT}`,

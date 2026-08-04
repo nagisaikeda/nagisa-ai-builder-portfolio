@@ -1,25 +1,25 @@
 import type { Metadata } from "next";
-import { DesignSystemStoryTemplate } from "@/components/design-system-story/DesignSystemStoryTemplate";
+import { AtlasStoryTemplate } from "@/components/atlas-story/AtlasStoryTemplate";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { aiNativeDesignSystemStory } from "@/lib/case-studies/design-system/ai-native-design-system";
+import { atlasStory } from "@/lib/case-studies/design-system/ai-native-design-system";
 
 export const metadata: Metadata = {
-  title: "AI-Native Design System — Nagisa Ikeda",
-  description: aiNativeDesignSystemStory.subtitle,
+  title: "Atlas — Nagisa Ikeda",
+  description: atlasStory.headline,
   openGraph: {
-    title: aiNativeDesignSystemStory.title,
-    description: aiNativeDesignSystemStory.subtitle,
+    title: `Atlas — ${atlasStory.headline}`,
+    description: atlasStory.supportingCopy,
     type: "article",
   },
 };
 
-export default function AiNativeDesignSystemPage() {
+export default function AtlasPage() {
   return (
     <>
       <Header />
       <main className="mx-auto max-w-[1120px] px-6 md:px-8">
-        <DesignSystemStoryTemplate story={aiNativeDesignSystemStory} />
+        <AtlasStoryTemplate story={atlasStory} />
       </main>
       <Footer />
     </>

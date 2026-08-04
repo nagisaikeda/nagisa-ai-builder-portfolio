@@ -52,7 +52,7 @@ export function SectionHeader({
             ? "text-section-serif"
             : muted
               ? "text-lg font-medium tracking-tight text-body md:text-xl"
-              : "text-section-sans"
+              : "text-[clamp(1.375rem,2vw,1.75rem)] font-medium leading-tight tracking-tight text-ink"
         }
       >
         {title}

@@ -21,11 +21,11 @@ const instrumentSerif = Instrument_Serif({
 export const metadata: Metadata = {
   title: "Nagisa Ikeda — AI Design Engineer",
   description:
-    "Designs and builds AI-native products from idea to working prototype. 2nd Place — YC AI Growth Hackathon. FedEx Dataworks · Nara Labs.",
+    "Building Enterprise AI, shipping AI products, and designing AI-native systems. FedEx Dataworks · Nara Labs · YC AI Growth Hackathon.",
   openGraph: {
     title: "Nagisa Ikeda — AI Design Engineer",
     description:
-      "Shipped ReadyLead, ProbeIQ, Local PM OS. Building agentic products and AI-native workflows.",
+      "Enterprise AI, shipped AI products, and AI-native design systems—from FedEx AI Concierge to ReadyLead to Atlas.",
     type: "website",
   },
 };

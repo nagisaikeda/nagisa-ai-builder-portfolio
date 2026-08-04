@@ -13,7 +13,7 @@ export const localPmOsCaseStudy: CaseStudy = {
   demoLabel: "Watch Demo",
   githubLabel: "GitHub Repo",
   backLabel: "Back to AI Work",
-  backHref: "/#ai-products",
+  backHref: "/#more-ai-products",
   heroImage: "/images/projects/local-pm-os/hero.png",
   heroImageAspect: "16/10",
   snapshot: [

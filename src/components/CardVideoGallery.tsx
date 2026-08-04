@@ -1,62 +1,15 @@
+import { FloatingScreenComposition } from "@/components/ui/FloatingScreenComposition";
+
 type CardVideoGalleryProps = {
   videos: readonly string[];
   posters?: readonly (string | undefined)[];
   compact?: boolean;
+  /**
+   * When false, videos already include device chrome — no outer white screen frame.
+   * Defaults to true (floating screen / framed presentation).
+   */
   deviceFrame?: boolean;
 };
-
-function CardVideo({
-  src,
-  poster,
-  deviceFrame,
-}: {
-  src: string;
-  poster?: string;
-  deviceFrame: boolean;
-}) {
-  if (!deviceFrame) {
-    return (
-      <div className="flex min-h-0 flex-1 justify-center">
-        <video
-          className="block h-auto w-full max-w-[180px] max-h-[min(320px,42vh)] object-contain sm:max-w-[200px] sm:max-h-[min(340px,45vh)]"
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster={poster}
-          aria-hidden
-        >
-          <source src={src} type="video/mp4" />
-        </video>
-      </div>
-    );
-  }
-
-  const sizeClass =
-    "h-[min(320px,42vh)] w-[min(155px,calc(min(320px,42vh)*9/19.5))] sm:h-[min(340px,45vh)] sm:w-[min(165px,calc(min(340px,45vh)*9/19.5))]";
-
-  return (
-    <div className="flex min-h-0 flex-1 justify-center">
-      <div className={sizeClass}>
-        <div className="relative h-full w-full overflow-hidden rounded-[22px] bg-black shadow-[0_12px_32px_rgba(10,10,10,0.1)]">
-          <video
-            className="absolute inset-0 h-full w-full object-contain"
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            poster={poster}
-            aria-hidden
-          >
-            <source src={src} type="video/mp4" />
-          </video>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export function CardVideoGallery({
   videos,
@@ -64,28 +17,18 @@ export function CardVideoGallery({
   compact,
   deviceFrame = true,
 }: CardVideoGalleryProps) {
-  const minH = deviceFrame
-    ? compact
-      ? "md:min-h-[280px]"
-      : "md:min-h-[340px]"
-    : compact
-      ? "md:min-h-[240px]"
-      : "md:min-h-[280px]";
-
   return (
     <div
-      className={`flex h-full min-h-0 w-full max-w-full items-center justify-center overflow-hidden bg-white px-4 py-6 sm:px-6 md:px-8 ${minH}`}
+      className={`flex h-full min-h-0 w-full max-w-full items-center justify-center overflow-hidden bg-white ${
+        compact ? "min-h-[280px]" : "min-h-[340px] md:min-h-[400px]"
+      }`}
     >
-      <div className="flex w-full max-w-full flex-col items-center justify-center gap-4 overflow-hidden sm:flex-row sm:gap-5">
-        {videos.slice(0, 2).map((src, index) => (
-          <CardVideo
-            key={src}
-            src={src}
-            poster={posters?.[index]}
-            deviceFrame={deviceFrame}
-          />
-        ))}
-      </div>
+      <FloatingScreenComposition
+        videos={videos}
+        posters={posters}
+        compact={compact}
+        deviceFrame={deviceFrame}
+      />
     </div>
   );
 }

@@ -1,44 +1,56 @@
-import type { GridCard } from "@/lib/case-studies/types";
-import type { RelatedProject } from "@/lib/case-studies/types";
-
-export type DesignSystemStoryMeta = {
+export type AtlasStoryMeta = {
   label: string;
   value: string;
 };
 
-export type ComponentCategory = {
+export type AtlasPrinciple = {
   title: string;
-  items: readonly string[];
+  description: string;
 };
 
-export type ToolkitGroup = {
-  title: string;
-  items: readonly string[];
+export type AtlasPattern = {
+  id: string;
+  name: string;
+  purpose: string;
+  stateExample: string;
+  implementation?: string;
+  status: "experimental" | "draft" | "planned";
 };
 
-export type DesignSystemStory = {
+export type AtlasInformedProject = {
+  title: string;
+  href?: string;
+  image?: string;
+};
+
+export type AtlasStory = {
   slug: string;
+  eyebrow: string;
   title: string;
-  subtitle: string;
-  meta: readonly DesignSystemStoryMeta[];
-  tldr: string;
-  problem: {
+  headline: string;
+  supportingCopy: string;
+  meta: readonly AtlasStoryMeta[];
+  whyBuilt: {
+    heading: string;
+    quote: string;
+    progression: readonly string[];
+  };
+  patterns: {
     heading: string;
     intro: string;
-    bullets: readonly string[];
-    closing: string;
-  };
-  thesis: {
-    heading: string;
-    body: string;
+    items: readonly AtlasPattern[];
   };
   principles: {
     heading: string;
-    cards: readonly GridCard[];
+    items: readonly AtlasPrinciple[];
   };
   architecture: {
     heading: string;
     layers: readonly string[];
+    body: string;
+  };
+  documentation: {
+    heading: string;
     body: string;
   };
   workflow: {
@@ -46,37 +58,27 @@ export type DesignSystemStory = {
     steps: readonly string[];
     body: string;
   };
-  componentSystem: {
-    heading: string;
-    categories: readonly ComponentCategory[];
-    image?: string;
-    imageAlt?: string;
-  };
-  toolkit: {
-    heading: string;
-    groups: readonly ToolkitGroup[];
-  };
-  exampleProducts: {
+  informedBy: {
     heading: string;
     body: string;
-    projects: readonly RelatedProject[];
-  };
-  built: {
-    heading: string;
-    intro: string;
-    items: readonly string[];
-  };
-  lessons: {
-    heading: string;
-    items: readonly string[];
+    projects: readonly AtlasInformedProject[];
   };
   outcome: {
     heading: string;
-    result: string;
-    impacts: readonly string[];
+    items: readonly string[];
   };
-  relatedHeading: string;
-  relatedProjects: readonly RelatedProject[];
-  backLabel?: string;
-  backHref?: string;
+  ctas: {
+    docsLabel: string;
+    docsHref: string;
+    sourceLabel: string;
+    sourceHref: string;
+  };
+  backLabel: string;
+  backHref: string;
 };
+
+/** @deprecated Use AtlasStory */
+export type DesignSystemStory = AtlasStory;
+
+/** @deprecated Use AtlasStoryMeta */
+export type DesignSystemStoryMeta = AtlasStoryMeta;

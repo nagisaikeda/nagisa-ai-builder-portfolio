@@ -11,7 +11,7 @@ export const probeiqCaseStudy: CaseStudy = {
   githubUrl: null,
   demoLabel: "Watch Demo",
   backLabel: "Back to AI Work",
-  backHref: "/#ai-products",
+  backHref: "/#more-ai-products",
   showGithub: false,
   heroImage: "/images/projects/probeiq/hero.png",
   heroImageAspect: "1024/770",

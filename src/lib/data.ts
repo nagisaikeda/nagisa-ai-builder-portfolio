@@ -11,6 +11,7 @@ export type ProductMockupId =
 
 export type WorkItem = {
   title: string;
+  subtitle?: string;
   category: string;
   description: string;
   tags: readonly string[];
@@ -37,21 +38,25 @@ export type WorkItem = {
 export const site = {
   name: "Nagisa Ikeda",
   role: "AI Design Engineer",
-  headlineLines: [
-    "Nagisa Ikeda is an AI design engineer building ambitious agentic products.",
-  ],
+  headline:
+    "Building Enterprise AI, shipping AI products, and designing AI-native systems.",
   credibility: [
     "AI Design Engineer @ FedEx Dataworks",
     "Founder @ Nara Labs",
     "2nd Place — YC AI Growth Hackathon",
   ],
-  proof:
-    "Shipped ReadyLead · Built ProbeIQ · Built Local PM OS · Shipped Ahead iOS · Building Ahead Agent",
-  progression:
-    "Enterprise Product Design → AI Product Design → AI Systems → Design Engineering → Founder",
+  identityBadges: [
+    "Enterprise AI",
+    "AI Product Builder",
+    "AI-Native Design Systems",
+  ],
   email: "hello@nagisaikeda.com",
   linkedin: "https://www.linkedin.com/in/nagisaikeda/",
-  resume: "/resume/nagisa-ikeda-ai-design-engineer.pdf",
+  resumePage: "/resume",
+  resumePdf: "/resume/nagisa-ikeda-ai-design-engineer.pdf",
+  resumeDownloadName: "Nagisa-Ikeda-AI-Design-Engineer.pdf",
+  /** @deprecated Use resumePage for links; resumePdf for the file */
+  resume: "/resume",
   naraLabs: "https://www.nara-labs.com/",
   framerWork: "https://nagisaikeda.com/#work",
 } as const;
@@ -79,76 +84,61 @@ export const heroPreview = {
   ],
 } as const;
 
-export const currentlyBuilding = {
-  label: "Currently Building",
-  title: "AI systems for growth, decision-making, and product workflows.",
-  body: "I prototype AI-native products across agents, memory, retrieval, local workflows, and decision systems — moving quickly from problem framing to working software.",
-  chips: [
-    "Agents",
-    "RAG",
-    "Memory",
-    "AI Workflows",
-    "Decision Systems",
-    "Local AI",
-    "Next.js",
-    "Python",
-    "OpenAI",
-    "FastAPI",
-  ],
-} as const;
-
-export const aiProducts = {
+export const featuredWork = {
   id: "ai-products",
   label: "Featured",
-  title: "Featured AI Products",
+  title: "Featured AI Work",
   description:
-    "AI-native products, systems, and design engineering — from agentic workflows to the infrastructure that powers them.",
+    "Enterprise AI, shipped AI products, and AI-native systems—the work that defines how I build.",
   items: [
     {
       title: "ReadyLead",
-      category: "AI Growth Intelligence",
+      category: "AI Product",
+      subtitle: "YC AI Growth Hackathon — 2nd Place",
       description:
-        "AI growth intelligence platform that transforms fragmented public signals into prioritized commercial opportunities.",
-      meta: "2nd Place — YC AI Growth Hackathon",
+        "AI growth intelligence platform that transforms fragmented buying signals into prioritized commercial opportunities—built end-to-end from discovery to production.",
+      tags: [
+        "AI workflows",
+        "Growth intelligence",
+        "Shipping products",
+        "Agent UX",
+      ],
       cta: "View case study",
-      tags: [] as readonly string[],
       href: "/projects/readylead",
       image: "/images/projects/readylead/building-analysis.png",
       imageAnchor: "left",
       tint: "#f3f1ee",
     },
     {
-      title: "ProbeIQ",
-      category: "Multimodal AI",
+      title: "FedEx AI Concierge",
+      category: "Enterprise AI",
       description:
-        "Transforms educational videos into conversational AI tutors using retrieval, voice, and grounded reasoning.",
-      tags: [] as readonly string[],
-      cta: "View case study",
-      href: "/projects/probeiq",
-      image: "/images/projects/probeiq/hero.png",
-      tint: "#f4f3f8",
+        "Enterprise AI workflows for customer support—AI onboarding, multi-agent orchestration, and operational decision-making designed for large-scale deployment.",
+      tags: [
+        "AI onboarding",
+        "Multi-agent workflows",
+        "Agent orchestration",
+        "Enterprise support",
+      ],
+      cta: "Coming soon",
+      href: null,
+      mockup: "fedex",
+      tint: "#f3f2ef",
     },
     {
-      title: "Local PM OS",
-      category: "AI Operating System",
+      title: "Atlas",
+      category: "AI-Native Design System",
       description:
-        "A local-first operating system that continuously builds organizational memory and helps AI-native product teams make better decisions.",
-      tags: [] as readonly string[],
-      cta: "View case study",
-      href: "/projects/local-pm-os",
-      image: "/images/projects/local-pm-os/dashboard.png",
-      imageAnchor: "left",
-      tint: "#f5f5f5",
-    },
-    {
-      title: "AI-Native Design System",
-      category: "Design Engineering",
-      description:
-        "A reusable design system built for humans and AI agents to design, code, document, and ship AI products faster.",
-      tags: [] as readonly string[],
+        "A machine-readable design system and reusable interaction framework for humans and AI agents—bridging design engineering, AI implementation, and design-to-code workflows.",
+      tags: [
+        "Design Engineering",
+        "Machine-readable metadata",
+        "AI-native interfaces",
+        "Human + AI collaboration",
+      ],
       cta: "View case study",
       href: "/design/ai-native-design-system",
-      image: "/images/work/ai-native-design-system.png",
+      image: "/images/work/atlas.png",
       imageSizes: "(max-width: 1024px) 100vw, 700px",
       imageUnoptimized: true,
       tint: "#f0efed",
@@ -157,8 +147,8 @@ export const aiProducts = {
       title: "Ahead Agent",
       category: "Personal AI",
       description:
-        "A next-generation memory-driven financial decision agent built using modern LLM workflows.",
-      tags: [] as readonly string[],
+        "A memory-driven financial decision agent—long-term reasoning, agent UX, and persistent context for real financial decisions.",
+      tags: ["Memory", "Long-term reasoning", "Agent UX", "Financial decisions"],
       cta: "Coming soon",
       href: null,
       image: "/images/work/ahead-agent.png",
@@ -166,16 +156,43 @@ export const aiProducts = {
       imageUnoptimized: true,
       tint: "#eef2f4",
     },
+  ] satisfies readonly WorkItem[],
+};
+
+export const moreAiProducts = {
+  id: "more-ai-products",
+  label: "More AI",
+  title: "More AI Products",
+  description:
+    "Additional AI systems focused on retrieval, voice, organizational memory, and product intelligence.",
+  items: [
     {
-      title: "FedEx AI Concierge",
-      category: "Enterprise AI",
+      title: "ProbeIQ",
+      category: "AI Product",
       description:
-        "Exploring AI-native workflows for enterprise customer support and operations.",
-      tags: [] as readonly string[],
-      cta: "Coming soon",
-      href: null,
-      mockup: "fedex",
-      tint: "#f3f2ef",
+        "Voice AI tutor that turns educational video into grounded, conversational learning through retrieval and reasoning.",
+      tags: ["Voice AI", "RAG", "Conversational tutor", "Grounded reasoning"],
+      cta: "Read Case Study",
+      href: "/projects/probeiq",
+      image: "/images/projects/probeiq/hero.png",
+      tint: "#f4f3f8",
+    },
+    {
+      title: "Local PM OS",
+      category: "AI Product",
+      description:
+        "AI operating system for product teams—organizational memory, product intelligence, and autonomous prioritization.",
+      tags: [
+        "AI operating system",
+        "Organizational memory",
+        "Product intelligence",
+        "Autonomous prioritization",
+      ],
+      cta: "Read Case Study",
+      href: "/projects/local-pm-os",
+      image: "/images/projects/local-pm-os/dashboard.png",
+      imageAnchor: "left",
+      tint: "#f5f5f5",
     },
   ] satisfies readonly WorkItem[],
 };
@@ -216,7 +233,7 @@ export const productDesignWork = {
         "SwiftUI",
         "Founder Project",
       ],
-      meta: "✅ Shipped · App Store · April 2026",
+      meta: "Shipped · App Store · April 2026",
       cta: "View case study",
       href: "/projects/ahead-ios",
       cardVideos: [
@@ -248,6 +265,28 @@ export const productDesignWork = {
   ] satisfies readonly WorkItem[],
 };
 
+/** @deprecated Use moreAiProducts */
+export const moreWork = moreAiProducts;
+
+/** @deprecated Featured work absorbs systems */
+export const systemsWork = {
+  id: "systems",
+  label: "Systems",
+  title: "Systems",
+  description: "",
+  items: [] as readonly WorkItem[],
+};
+
+/** @deprecated Use featuredWork */
+export const aiProducts = featuredWork;
+
+export const currentlyBuilding = {
+  label: "Currently Building",
+  title: "AI systems for growth, decision-making, and product workflows.",
+  body: "I prototype AI-native products across agents, memory, retrieval, local workflows, and decision systems — moving quickly from problem framing to working software.",
+  chips: [] as readonly string[],
+} as const;
+
 export const buildLog = {
   year: "2026",
   entries: [
@@ -261,107 +300,40 @@ export const buildLog = {
   ],
 } as const;
 
+export const whatIBring = {
+  id: "what-i-bring",
+  eyebrow: "What I Bring",
+  headline: "Enterprise AI. Shipped products. AI-native systems.",
+  items: [
+    {
+      title: "Enterprise AI",
+      sentence:
+        "Design complex AI workflows—multi-agent systems, onboarding, and orchestration for enterprise operations at scale.",
+    },
+    {
+      title: "AI Product Builder",
+      sentence:
+        "Ship AI products from customer discovery to production software—strategy, agent UX, and implementation.",
+    },
+    {
+      title: "AI-Native Design Systems",
+      sentence:
+        "Build systems and developer workflows that help humans and AI agents design, document, and ship faster.",
+    },
+  ],
+} as const;
+
+/** @deprecated Use whatIBring */
 export const capabilities = {
-  eyebrow: "Capabilities",
-  headlineLines: [
-    "Building AI-native products",
-    "from strategy to production.",
-  ],
-  groups: [
-    {
-      title: "Product",
-      sentence:
-        "Designing AI-native experiences from product strategy through interaction design.",
-      tags: [
-        "Product Strategy",
-        "AI UX",
-        "Systems Design",
-        "Design Systems",
-      ],
-    },
-    {
-      title: "AI Systems",
-      sentence:
-        "Designing intelligent workflows with agents, retrieval, memory, and reasoning.",
-      tags: [
-        "Agents",
-        "RAG",
-        "Memory",
-        "Model Context Protocol (MCP)",
-        "Evals",
-        "Prompt Engineering",
-      ],
-    },
-    {
-      title: "Engineering",
-      sentence:
-        "Building production-ready prototypes with modern web technologies.",
-      tags: [
-        "TypeScript",
-        "Next.js",
-        "React",
-        "Python",
-        "FastAPI",
-        "REST APIs",
-        "Vercel",
-      ],
-    },
-    {
-      title: "Shipping",
-      sentence:
-        "Moving quickly from idea to working software through rapid iteration.",
-      tags: [
-        "Rapid Prototyping",
-        "0→1 Products",
-        "Hackathons",
-        "Customer Discovery",
-        "Product Thinking",
-      ],
-    },
-  ],
+  eyebrow: whatIBring.eyebrow,
+  headlineLines: [whatIBring.headline],
+  groups: whatIBring.items.map((item) => ({
+    title: item.title,
+    sentence: item.sentence,
+    tags: [] as readonly string[],
+  })),
   aiStack: {
     label: "AI Stack",
-    groups: [
-      {
-        title: "Models",
-        items: [
-          "OpenAI",
-          "Claude",
-          "Gemini",
-          "Qwen",
-          "MiniMax",
-          "DeepSeek",
-        ],
-      },
-      {
-        title: "Engineering",
-        items: [
-          "TypeScript",
-          "React",
-          "Next.js",
-          "Python",
-          "FastAPI",
-          "Convex",
-          "Vercel",
-        ],
-      },
-      {
-        title: "AI Systems",
-        items: [
-          "Agents",
-          "MCP",
-          "RAG",
-          "Memory",
-          "Vector Databases",
-          "Vapi",
-          "LiveKit",
-          "Evals",
-        ],
-      },
-      {
-        title: "Workflow",
-        items: ["Cursor", "Claude Code", "GitHub", "Figma"],
-      },
-    ],
+    groups: [] as readonly { title: string; items: readonly string[] }[],
   },
 } as const;

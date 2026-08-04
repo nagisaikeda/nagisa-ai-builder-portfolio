@@ -1,8 +1,12 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { heroPreview } from "@/lib/data";
+
+const SHIPPING_STAGGER_MS = 275;
+const SHIPPING_INITIAL_DELAY_MS = 400;
 
 function WindowChrome() {
   return (
@@ -11,6 +15,76 @@ function WindowChrome() {
       <span className="h-2.5 w-2.5 rounded-full bg-border" />
       <span className="h-2.5 w-2.5 rounded-full bg-border" />
     </div>
+  );
+}
+
+function ShippingList({
+  items,
+}: {
+  items: typeof heroPreview.shipping;
+}) {
+  const itemCount = items.length;
+  const [completedCount, setCompletedCount] = useState(0);
+
+  useEffect(() => {
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (reducedMotion) {
+      const timeout = window.setTimeout(() => setCompletedCount(itemCount), 0);
+      return () => clearTimeout(timeout);
+    }
+
+    const timeouts = items.map((_, index) =>
+      window.setTimeout(
+        () => setCompletedCount(index + 1),
+        SHIPPING_INITIAL_DELAY_MS + index * SHIPPING_STAGGER_MS,
+      ),
+    );
+
+    return () => timeouts.forEach((timeout) => clearTimeout(timeout));
+  }, [itemCount, items]);
+
+  return (
+    <ul className="space-y-2.5">
+      {items.map((item, index) => {
+        const isComplete = index < completedCount;
+
+        return (
+          <li
+            key={item.label}
+            className={`flex items-start gap-2 text-[11px] leading-snug ${
+              "active" in item && item.active
+                ? "font-medium text-ink"
+                : "text-body"
+            }`}
+          >
+            <span className="text-muted-soft mt-px shrink-0">
+              <span
+                className={
+                  isComplete
+                    ? "shipping-check shipping-check--complete"
+                    : "shipping-check"
+                }
+                aria-hidden={!isComplete}
+              >
+                {isComplete ? "✓" : ""}
+              </span>
+            </span>
+            <span
+              className={
+                isComplete
+                  ? "shipping-item-text shipping-item-text--complete"
+                  : "shipping-item-text"
+              }
+            >
+              {item.label}
+            </span>
+          </li>
+        );
+      })}
+    </ul>
   );
 }
 
@@ -42,23 +116,7 @@ export function HeroVisual() {
           <div className="flex w-full">
             <aside className="hidden w-[38%] border-r border-border bg-canvas-warm p-4 sm:block">
               <p className="text-label mb-3 text-[10px]">Shipping</p>
-              <ul className="space-y-2.5">
-                {heroPreview.shipping.map((item) => (
-                  <li
-                    key={item.label}
-                    className={`flex items-start gap-2 text-[11px] leading-snug ${
-                      "active" in item && item.active
-                        ? "font-medium text-ink"
-                        : "text-body"
-                    }`}
-                  >
-                    <span className="text-muted-soft mt-px shrink-0">
-                      {item.done ? "✓" : "○"}
-                    </span>
-                    {item.label}
-                  </li>
-                ))}
-              </ul>
+              <ShippingList items={heroPreview.shipping} />
             </aside>
             <div className="min-w-0 flex-1 bg-surface p-4 md:p-5">
               <p className="text-label mb-3 text-[10px]">Agent session</p>

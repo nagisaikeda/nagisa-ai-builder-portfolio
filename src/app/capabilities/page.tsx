@@ -1,15 +1,15 @@
 import type { Metadata } from "next";
-import { Capabilities } from "@/components/Capabilities";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import { capabilities } from "@/lib/data";
+import { WhatIBring } from "@/components/WhatIBring";
+import { whatIBring } from "@/lib/data";
 
 export const metadata: Metadata = {
-  title: "Capabilities — Nagisa Ikeda",
-  description: capabilities.headlineLines.join(" "),
+  title: "What I Bring — Nagisa Ikeda",
+  description: whatIBring.headline,
   openGraph: {
-    title: "Capabilities — Nagisa Ikeda",
-    description: capabilities.headlineLines.join(" "),
+    title: "What I Bring — Nagisa Ikeda",
+    description: whatIBring.headline,
     type: "website",
   },
 };
@@ -19,7 +19,7 @@ export default function CapabilitiesPage() {
     <>
       <Header />
       <main>
-        <Capabilities standalone />
+        <WhatIBring standalone />
       </main>
       <Footer />
     </>

@@ -17,12 +17,9 @@ export function Hero() {
           className="max-w-2xl"
         >
           <motion.h1 variants={staggerItem} className="text-hero-headline">
-            {site.headlineLines.map((line, i) => (
-              <span key={line} className={i < 2 ? "block" : "block"}>
-                {line}
-              </span>
-            ))}
+            {site.headline}
           </motion.h1>
+
           <motion.div
             variants={staggerItem}
             className="mt-6 space-y-1 text-mono-sm"
@@ -31,22 +28,28 @@ export function Hero() {
               <p key={line}>{line}</p>
             ))}
           </motion.div>
-          <motion.p variants={staggerItem} className="text-mono-sm mt-4">
-            {site.proof}
-          </motion.p>
-          <motion.p variants={staggerItem} className="text-mono-sm mt-3">
-            {site.progression}
-          </motion.p>
+
+          <motion.ul
+            variants={staggerItem}
+            className="mt-7 flex flex-wrap gap-2"
+          >
+            {site.identityBadges.map((badge) => (
+              <li
+                key={badge}
+                className="rounded-full border border-border bg-surface px-3.5 py-1.5 text-[0.8125rem] font-medium text-ink"
+              >
+                {badge}
+              </li>
+            ))}
+          </motion.ul>
+
           <motion.div
             variants={staggerItem}
             className="mt-9 flex flex-wrap items-center gap-3"
           >
-            <Button href="#ai-products">Explore Projects</Button>
-            <Button href="#build-log" variant="secondary">
-              Build Log →
-            </Button>
-            <Button href={site.resume} variant="ghost" external>
-              Resume
+            <Button href="#ai-products">Explore Work</Button>
+            <Button href={site.resumePage} variant="secondary">
+              View Resume
             </Button>
           </motion.div>
         </motion.div>

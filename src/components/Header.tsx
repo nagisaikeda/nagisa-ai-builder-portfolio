@@ -6,10 +6,11 @@ import { site } from "@/lib/data";
 import { fadeIn } from "@/lib/motion";
 
 const navLinks = [
-  { label: "AI Work", href: "/#ai-products" },
+  { label: "Work", href: "/#ai-products" },
+  { label: "AI Products", href: "/#more-ai-products" },
   { label: "Design", href: "/#product-design" },
+  { label: "Resume", href: "/#resume" },
   { label: "Build Log", href: "/#build-log" },
-  { label: "Capabilities", href: "/capabilities" },
 ];
 
 export function Header() {
@@ -48,9 +49,7 @@ export function Header() {
             Contact
           </Link>
           <Link
-            href={site.resume}
-            target="_blank"
-            rel="noopener noreferrer"
+            href={site.resumePage}
             className="inline-flex h-9 items-center rounded-full bg-ink px-4 text-sm font-medium text-canvas-warm transition-colors hover:bg-ink-soft"
           >
             Resume

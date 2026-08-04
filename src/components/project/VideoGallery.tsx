@@ -1,3 +1,5 @@
+import { FloatingScreenVideo } from "@/components/ui/FloatingScreenComposition";
+
 export type VideoGalleryItem = {
   title: string;
   description?: string;
@@ -10,78 +12,19 @@ type VideoGalleryProps = {
   description?: string;
   items: readonly VideoGalleryItem[];
   layout?: "stack" | "grid" | "pair";
-  /** When false, videos render without an outer device bezel (use for screen recordings that already include the phone UI). */
+  /** @deprecated Device frames removed — floating screens only */
   deviceFrame?: boolean;
 };
-
-/** iPhone display aspect ratio (~19.5:9). */
-const IPHONE_ASPECT = "9 / 19.5";
-
-function VideoPanel({
-  children,
-  deviceFrame,
-  size = "default",
-}: {
-  children: React.ReactNode;
-  deviceFrame: boolean;
-  size?: "default" | "pair" | "card";
-}) {
-  const framelessWidthClass =
-    size === "pair"
-      ? "w-full max-w-[220px] sm:max-w-[240px]"
-      : size === "card"
-        ? "w-full max-w-[180px] sm:max-w-[200px]"
-        : "w-full max-w-[300px] sm:max-w-[320px]";
-
-  if (!deviceFrame) {
-    return (
-      <div className="flex w-full justify-center">
-        <div className={framelessWidthClass}>{children}</div>
-      </div>
-    );
-  }
-
-  const widthClass =
-    size === "pair"
-      ? "h-[min(400px,52vh)] w-[min(194px,calc(min(400px,52vh)*9/19.5))] sm:h-[min(420px,55vh)] sm:w-[min(206px,calc(min(420px,55vh)*9/19.5))]"
-      : size === "card"
-        ? "w-full max-w-[160px] sm:max-w-[180px]"
-        : "w-full max-w-[300px] sm:max-w-[320px]";
-
-  const maxHeight = size === "card" ? 340 : undefined;
-
-  const inner = (
-    <div
-      className={`relative ${size === "pair" ? "h-full w-full" : "w-full"} rounded-[1.25rem] bg-black`}
-      style={size === "pair" ? undefined : { aspectRatio: IPHONE_ASPECT, maxHeight }}
-    >
-      {children}
-    </div>
-  );
-
-  return (
-    <div className="flex w-full justify-center">
-      <div className={widthClass}>
-        <div className="overflow-hidden rounded-[2rem] border-[8px] border-ink/90 bg-ink p-1 shadow-[0_24px_60px_rgba(10,10,10,0.12)]">
-          {inner}
-        </div>
-      </div>
-    </div>
-  );
-}
 
 export function VideoGallery({
   heading,
   description,
   items,
   layout = "stack",
-  deviceFrame = true,
 }: VideoGalleryProps) {
   const isGrid = layout === "grid";
   const isPair = layout === "pair";
-  const pairCaptionWidthClass = deviceFrame
-    ? "max-w-[206px]"
-    : "max-w-[220px] sm:max-w-[240px]";
+  const pairCaptionWidthClass = "max-w-[280px] sm:max-w-[300px]";
 
   return (
     <div>
@@ -133,28 +76,12 @@ export function VideoGallery({
             )}
 
             <div className={isGrid ? "bg-canvas-warm px-4 py-8" : ""}>
-              <VideoPanel
-                deviceFrame={deviceFrame}
+              <FloatingScreenVideo
+                src={item.src}
+                poster={item.poster}
+                ariaLabel={item.title}
                 size={isPair ? "pair" : "default"}
-              >
-                <video
-                  className={
-                    deviceFrame
-                      ? "absolute inset-0 h-full w-full object-contain"
-                      : "block h-auto w-full max-h-[min(420px,55vh)] object-contain"
-                  }
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  controls={!isPair}
-                  preload="metadata"
-                  poster={item.poster}
-                  aria-label={item.title}
-                >
-                  <source src={item.src} type="video/mp4" />
-                </video>
-              </VideoPanel>
+              />
             </div>
 
             {isPair && (
