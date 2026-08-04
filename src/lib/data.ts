@@ -45,11 +45,6 @@ export const site = {
     "Founder @ Nara Labs",
     "2nd Place — YC AI Growth Hackathon",
   ],
-  identityBadges: [
-    "Enterprise AI",
-    "AI Product Builder",
-    "AI-Native Design Systems",
-  ],
   email: "hello@nagisaikeda.com",
   linkedin: "https://www.linkedin.com/in/nagisaikeda/",
   resumePage: "/resume",
