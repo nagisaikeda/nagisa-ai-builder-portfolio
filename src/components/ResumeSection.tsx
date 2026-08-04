@@ -30,7 +30,7 @@ export function ResumeSection() {
           </p>
         </div>
 
-        <Button href={site.resumePage}>View Resume →</Button>
+        <Button href={site.resumePage}>View Resume</Button>
       </motion.div>
     </Section>
   );
