@@ -16,17 +16,7 @@ export function Hero() {
           animate="visible"
           className="max-w-2xl"
         >
-          <motion.p
-            variants={staggerItem}
-            className="text-[1.375rem] font-medium tracking-tight text-ink md:text-[1.625rem]"
-          >
-            {site.name}
-          </motion.p>
-
-          <motion.h1
-            variants={staggerItem}
-            className="text-hero-headline mt-4"
-          >
+          <motion.h1 variants={staggerItem} className="text-hero-headline">
             {site.headline}
           </motion.h1>
 
