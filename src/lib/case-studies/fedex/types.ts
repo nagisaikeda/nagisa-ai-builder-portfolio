@@ -23,6 +23,12 @@ export type FedExSystemLayer = {
   description: string;
 };
 
+export type FedExVisual = {
+  src: string;
+  alt: string;
+  caption?: string;
+};
+
 export type FedExStory = {
   slug: string;
   eyebrow: string;
@@ -31,12 +37,11 @@ export type FedExStory = {
   subtitle: string;
   summary: string;
   meta: readonly FedExMeta[];
-  heroPlaceholder: string;
+  hero: FedExVisual;
   opportunity: {
     heading: string;
     body: string;
-    diagramPlaceholder: string;
-    diagramCaption: string;
+    visual: FedExVisual;
   };
   whyDifferent: {
     heading: string;
@@ -56,7 +61,7 @@ export type FedExStory = {
     intro: string;
     modes: readonly FedExCard[];
     flow: readonly FedExFlowStep[];
-    diagramPlaceholder: string;
+    visual: FedExVisual;
     caption: string;
   };
   voiceStructured: {
@@ -64,14 +69,13 @@ export type FedExStory = {
     intro: string;
     body: string;
     pairings: readonly FedExCard[];
-    diagramPlaceholder: string;
-    caption: string;
+    visual: FedExVisual;
   };
   intent: {
     heading: string;
     intro: string;
     stages: readonly FedExFlowStep[];
-    diagramPlaceholder: string;
+    visual: FedExVisual;
     caption: string;
   };
   felix: {
@@ -79,13 +83,14 @@ export type FedExStory = {
     intro: string;
     body: string;
     responsibilities: readonly string[];
-    diagramPlaceholder: string;
+    visual: FedExVisual;
     caption: string;
   };
   patterns: {
     heading: string;
     intro: string;
     items: readonly FedExPattern[];
+    visual?: FedExVisual;
   };
   designSystem: {
     heading: string;

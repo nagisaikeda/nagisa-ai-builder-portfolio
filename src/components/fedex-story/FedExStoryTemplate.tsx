@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { AssetPlaceholder } from "@/components/fedex-story/AssetPlaceholder";
 import { ConceptualFlow } from "@/components/fedex-story/ConceptualFlow";
+import { FedExStoryImage } from "@/components/fedex-story/FedExStoryImage";
 import { Button } from "@/components/ui/Button";
 import type { FedExStory } from "@/lib/case-studies/fedex/types";
 import { fadeUp, staggerContainer, staggerItem } from "@/lib/motion";
@@ -125,14 +126,12 @@ export function FedExStoryTemplate({ story }: { story: FedExStory }) {
           </motion.div>
 
           <motion.div variants={staggerItem} className="mt-10">
-            <AssetPlaceholder
-              label={story.heroPlaceholder}
+            <FedExStoryImage
+              visual={story.hero}
               aspect="aspect-[16/9]"
               className="min-h-[240px] md:min-h-[380px]"
+              priority
             />
-            <p className="mt-3 text-mono-sm text-muted">
-              Conceptual interaction model — sanitized
-            </p>
           </motion.div>
         </motion.div>
       </section>
@@ -152,16 +151,11 @@ export function FedExStoryTemplate({ story }: { story: FedExStory }) {
                 <Body key={paragraph.slice(0, 48)}>{paragraph}</Body>
               ))}
             </div>
-            <div>
-              <AssetPlaceholder
-                label={story.opportunity.diagramPlaceholder}
-                aspect="aspect-[4/3]"
-                className="min-h-[280px]"
-              />
-              <p className="mt-3 text-mono-sm text-muted">
-                {story.opportunity.diagramCaption}
-              </p>
-            </div>
+            <FedExStoryImage
+              visual={story.opportunity.visual}
+              aspect="aspect-[4/3]"
+              className="min-h-[280px]"
+            />
           </div>
         </motion.div>
       </SectionShell>
@@ -268,8 +262,8 @@ export function FedExStoryTemplate({ story }: { story: FedExStory }) {
           </div>
 
           <div className="mt-12">
-            <AssetPlaceholder
-              label={story.multimodal.diagramPlaceholder}
+            <FedExStoryImage
+              visual={story.multimodal.visual}
               aspect="aspect-[16/9]"
               className="min-h-[240px]"
             />
@@ -310,14 +304,11 @@ export function FedExStoryTemplate({ story }: { story: FedExStory }) {
           </div>
 
           <div className="mt-12">
-            <AssetPlaceholder
-              label={story.voiceStructured.diagramPlaceholder}
+            <FedExStoryImage
+              visual={story.voiceStructured.visual}
               aspect="aspect-[16/9]"
               className="min-h-[220px]"
             />
-            <p className="mt-3 text-mono-sm text-muted">
-              {story.voiceStructured.caption}
-            </p>
           </div>
         </motion.div>
       </SectionShell>
@@ -340,8 +331,8 @@ export function FedExStoryTemplate({ story }: { story: FedExStory }) {
           </div>
 
           <div className="mt-12">
-            <AssetPlaceholder
-              label={story.intent.diagramPlaceholder}
+            <FedExStoryImage
+              visual={story.intent.visual}
               dark
               aspect="aspect-[16/9]"
               className="min-h-[240px]"
@@ -380,8 +371,8 @@ export function FedExStoryTemplate({ story }: { story: FedExStory }) {
           </ul>
 
           <div className="mt-12">
-            <AssetPlaceholder
-              label={story.felix.diagramPlaceholder}
+            <FedExStoryImage
+              visual={story.felix.visual}
               aspect="aspect-[16/9]"
               className="min-h-[220px]"
             />

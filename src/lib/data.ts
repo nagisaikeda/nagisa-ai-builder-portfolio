@@ -117,7 +117,9 @@ export const featuredWork = {
       ],
       cta: "View case study",
       href: "/projects/fedex-ai-concierge",
-      mockup: "fedex",
+      image: "/images/projects/fedex-ai-concierge/agent-mode-setup.png",
+      imageAnchor: "left",
+      imageUnoptimized: true,
       tint: "#f3f2ef",
     },
     {

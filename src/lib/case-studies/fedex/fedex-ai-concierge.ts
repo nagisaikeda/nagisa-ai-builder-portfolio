@@ -1,5 +1,7 @@
 import type { FedExStory } from "@/lib/case-studies/fedex/types";
 
+const imageBase = "/images/projects/fedex-ai-concierge";
+
 export const fedexAiConciergeStory: FedExStory = {
   slug: "fedex-ai-concierge",
   eyebrow: "Enterprise AI · Multimodal Interaction · Multi-Agent Systems",
@@ -23,15 +25,21 @@ export const fedexAiConciergeStory: FedExStory = {
       value: "Shipped foundation / adopted internally",
     },
   ],
-  heroPlaceholder:
-    "[Add sanitized multimodal interaction model diagram: Voice / Chat / Controls → Intent → Configuration → Human review]",
+  hero: {
+    src: `${imageBase}/agent-mode-setup.png`,
+    alt: "FedEx account setup with Ask FedEx sidebar in agent mode alongside structured onboarding controls",
+    caption:
+      "Sanitized concept — structured onboarding and conversational agent mode share one workflow state.",
+  },
   opportunity: {
     heading: "The opportunity",
     body: "Enterprise AI systems ask users to configure workflows that used to live in forms, tickets, and tribal knowledge. Natural language makes that configuration faster—but only if the system can translate intent into structured decisions that operators can inspect, edit, and trust.\n\nThe opportunity was not to design a chatbot. It was to design the interaction layer between human intent and machine orchestration.",
-    diagramPlaceholder:
-      "[System model: Human intent → Multimodal interface → AI reasoning → Structured configuration → Multi-agent execution → Human control]",
-    diagramCaption:
-      "Conceptual model: conversation and control as one configuration surface.",
+    visual: {
+      src: `${imageBase}/dashboard.png`,
+      alt: "FedEx enterprise dashboard with Felix AI concierge entry point integrated into shipping workflows",
+      caption:
+        "AI enters the product as a first-class capability—not a bolt-on chat widget.",
+    },
   },
   whyDifferent: {
     heading: "Why enterprise AI onboarding is different",
@@ -127,8 +135,12 @@ export const fedexAiConciergeStory: FedExStory = {
         description: "Human approves before execution",
       },
     ],
-    diagramPlaceholder:
-      "[Multimodal loop diagram: Voice ↔ Chat ↔ Structured controls, with shared system state]",
+    visual: {
+      src: `${imageBase}/tracking-conversation.png`,
+      alt: "FedEx homepage with Ask FedEx sidebar showing package tracking conversation alongside structured tracking controls",
+      caption:
+        "Chat and structured controls coexist on the same surface—modalities share state.",
+    },
     caption:
       "Modalities share one state. Switching channels never restarts the work.",
   },
@@ -159,10 +171,12 @@ export const fedexAiConciergeStory: FedExStory = {
           "Ambiguity or exceptions can be resolved in chat without leaving the configuration context.",
       },
     ],
-    diagramPlaceholder:
-      "[Voice → proposed config card → editable structured fields → confirm / revise]",
-    caption:
-      "Conceptual / sanitized pairing model—not a product screenshot.",
+    visual: {
+      src: `${imageBase}/introduction-step.png`,
+      alt: "FedEx account setup step with voice-ready indicator, account type selection cards, and Ask FedEx guidance",
+      caption:
+        "Voice-ready entry points sit alongside structured selection—users choose how to proceed.",
+    },
   },
   intent: {
     heading: "Intent translation",
@@ -190,8 +204,12 @@ export const fedexAiConciergeStory: FedExStory = {
         description: "Configuration ready for orchestration",
       },
     ],
-    diagramPlaceholder:
-      "[Intent translation pipeline: utterance → goal graph → config schema → review gate → orchestration]",
+    visual: {
+      src: `${imageBase}/review-confirm.png`,
+      alt: "FedEx review and confirm screen with structured account data and Ask FedEx sidebar showing agent mode activity",
+      caption:
+        "AI-gathered configuration rendered as editable structure—nothing ships without review.",
+    },
     caption:
       "Nothing becomes operational until the human-readable draft is accepted.",
   },
@@ -207,8 +225,12 @@ export const fedexAiConciergeStory: FedExStory = {
       "Keep orchestration coherent across specialized agents",
       "Preserve clear points for human review and control",
     ],
-    diagramPlaceholder:
-      "[Felix partnership model: User ↔ Felix ↔ Structured config ↔ Specialized agents]",
+    visual: {
+      src: `${imageBase}/agent-mode-setup.png`,
+      alt: "Ask FedEx in agent mode configuring a business account with structured onboarding steps visible",
+      caption:
+        "Agent mode drafts and queues steps—the user always sees what is planned before submission.",
+    },
     caption:
       "Users perceive one partner. The system coordinates capabilities behind that relationship.",
   },
