@@ -250,6 +250,7 @@ export function AtlasStoryTemplate({ story }: { story: AtlasStory }) {
                         src={project.image}
                         alt=""
                         fill
+                        quality={90}
                         className="object-cover object-top"
                         sizes="200px"
                       />

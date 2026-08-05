@@ -10,6 +10,7 @@ function isSvgSrc(src: string) {
   return src.split("?")[0]?.toLowerCase().endsWith(".svg") ?? false;
 }
 
+// High-resolution source assets are required for Retina displays; Next.js optimization cannot upscale beyond the source dimensions.
 /** Renders SVGs with a native img so vectors stay crisp at any DPR. */
 export function SharpImage({
   src,

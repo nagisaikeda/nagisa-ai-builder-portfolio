@@ -30,7 +30,6 @@ export type WorkItem = {
   passwordProtected?: boolean;
   imageFit?: "cover" | "contain";
   imageSizes?: string;
-  imageUnoptimized?: boolean;
   tint?: string;
   mockup?: ProductMockupId | null;
 };
@@ -102,6 +101,7 @@ export const featuredWork = {
       href: "/projects/readylead",
       image: "/images/projects/readylead/building-analysis.png",
       imageAnchor: "left",
+      imageSizes: "(max-width: 1024px) 100vw, 60vw",
       tint: "#f3f1ee",
     },
     {
@@ -117,9 +117,9 @@ export const featuredWork = {
       ],
       cta: "View case study",
       href: "/projects/fedex-ai-concierge",
-      image: "/images/projects/fedex-ai-concierge/agent-mode-setup.png",
+      image: "/images/projects/fedex-ai-concierge/agent-mode.png",
       imageAnchor: "left",
-      imageUnoptimized: true,
+      imageSizes: "(max-width: 1024px) 100vw, 60vw",
       tint: "#f3f2ef",
     },
     {
@@ -136,8 +136,7 @@ export const featuredWork = {
       cta: "View case study",
       href: "/design/ai-native-design-system",
       image: "/images/work/atlas.png",
-      imageSizes: "(max-width: 1024px) 100vw, 700px",
-      imageUnoptimized: true,
+      imageSizes: "(max-width: 1024px) 100vw, 60vw",
       tint: "#f0efed",
     },
     {
@@ -149,8 +148,7 @@ export const featuredWork = {
       cta: "Coming soon",
       href: null,
       image: "/images/work/ahead-agent.png",
-      imageSizes: "(max-width: 1024px) 100vw, 700px",
-      imageUnoptimized: true,
+      imageSizes: "(max-width: 1024px) 100vw, 60vw",
       tint: "#eef2f4",
     },
   ] satisfies readonly WorkItem[],
@@ -172,6 +170,7 @@ export const moreAiProducts = {
       cta: "Read Case Study",
       href: "/projects/probeiq",
       image: "/images/projects/probeiq/hero.png",
+      imageSizes: "(max-width: 768px) 100vw, 50vw",
       tint: "#f4f3f8",
     },
     {
@@ -189,6 +188,7 @@ export const moreAiProducts = {
       href: "/projects/local-pm-os",
       image: "/images/projects/local-pm-os/dashboard.png",
       imageAnchor: "left",
+      imageSizes: "(max-width: 768px) 100vw, 50vw",
       tint: "#f5f5f5",
     },
   ] satisfies readonly WorkItem[],

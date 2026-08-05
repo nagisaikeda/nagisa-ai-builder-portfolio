@@ -11,6 +11,10 @@ import { ProductMockup } from "@/components/ProductMockups";
 import { Section, SectionHeader } from "@/components/ui/Section";
 import { grantConnectedWealthAccess } from "@/lib/connected-wealth-access";
 import type { WorkItem } from "@/lib/data";
+import {
+  COMPACT_CARD_IMAGE_SIZES,
+  FEATURED_CARD_IMAGE_SIZES,
+} from "@/lib/image-sizes";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 
 type WorkSectionProps = {
@@ -107,10 +111,9 @@ function EditorialCardMedia({ project }: { project: WorkItem }) {
           alt=""
           width={1600}
           height={900}
-          unoptimized={project.imageUnoptimized}
-          quality={project.imageUnoptimized ? undefined : 90}
+          quality={90}
           className={objectClass}
-          sizes={project.imageSizes ?? "(max-width: 1024px) 100vw, 640px"}
+          sizes={project.imageSizes ?? FEATURED_CARD_IMAGE_SIZES}
         />
       </MediaFrame>
     );
@@ -140,8 +143,7 @@ function SystemsCardMedia({ project }: { project: WorkItem }) {
           alt=""
           width={1200}
           height={675}
-          unoptimized={project.imageUnoptimized}
-          quality={project.imageUnoptimized ? undefined : 90}
+          quality={90}
           className={objectClass}
           sizes="(max-width: 880px) 100vw, 880px"
         />
@@ -205,10 +207,9 @@ function CompactCardMedia({ project }: { project: WorkItem }) {
           alt=""
           width={800}
           height={600}
-          unoptimized={project.imageUnoptimized}
-          quality={project.imageUnoptimized ? undefined : 90}
+          quality={90}
           className={`h-full w-full max-w-full ${mediaObjectClass(project)}`}
-          sizes="(max-width: 768px) 100vw, 400px"
+          sizes={project.imageSizes ?? COMPACT_CARD_IMAGE_SIZES}
         />
       </MediaFrame>
     );

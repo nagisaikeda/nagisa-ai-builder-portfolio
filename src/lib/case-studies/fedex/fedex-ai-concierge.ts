@@ -26,19 +26,19 @@ export const fedexAiConciergeStory: FedExStory = {
     },
   ],
   hero: {
-    src: `${imageBase}/agent-mode-setup.png`,
-    alt: "FedEx account setup with Ask FedEx sidebar in agent mode alongside structured onboarding controls",
+    src: `${imageBase}/onboarding-hero.png`,
+    alt: "Ask FedEx AI account assistant guiding a multimodal enterprise onboarding flow with voice-ready controls and structured account setup",
     caption:
-      "Sanitized concept — structured onboarding and conversational agent mode share one workflow state.",
+      "Enterprise AI enters as a guided configuration experience—not a detached chat widget.",
   },
   opportunity: {
     heading: "The opportunity",
     body: "Enterprise AI systems ask users to configure workflows that used to live in forms, tickets, and tribal knowledge. Natural language makes that configuration faster—but only if the system can translate intent into structured decisions that operators can inspect, edit, and trust.\n\nThe opportunity was not to design a chatbot. It was to design the interaction layer between human intent and machine orchestration.",
     visual: {
-      src: `${imageBase}/dashboard.png`,
-      alt: "FedEx enterprise dashboard with Felix AI concierge entry point integrated into shipping workflows",
+      src: `${imageBase}/step-selection.png`,
+      alt: "FedEx account setup with business or personal path selection, voice-ready entry, and Ask FedEx agent mode controls",
       caption:
-        "AI enters the product as a first-class capability—not a bolt-on chat widget.",
+        "Users choose how to work—self-guided steps, conversational help, or agent mode—before configuration begins.",
     },
   },
   whyDifferent: {
@@ -136,10 +136,10 @@ export const fedexAiConciergeStory: FedExStory = {
       },
     ],
     visual: {
-      src: `${imageBase}/tracking-conversation.png`,
-      alt: "FedEx homepage with Ask FedEx sidebar showing package tracking conversation alongside structured tracking controls",
+      src: `${imageBase}/voice-onboarding.png`,
+      alt: "Ask FedEx sidebar with voice waveform, visible AI reasoning steps, and email verification form in the main onboarding surface",
       caption:
-        "Chat and structured controls coexist on the same surface—modalities share state.",
+        "Voice, chat, and structured controls share one workflow—reasoning stays visible while the user verifies each step.",
     },
     caption:
       "Modalities share one state. Switching channels never restarts the work.",
@@ -172,10 +172,10 @@ export const fedexAiConciergeStory: FedExStory = {
       },
     ],
     visual: {
-      src: `${imageBase}/introduction-step.png`,
-      alt: "FedEx account setup step with voice-ready indicator, account type selection cards, and Ask FedEx guidance",
+      src: `${imageBase}/agent-mode.png`,
+      alt: "FedEx company information form prefilled by Ask FedEx agent mode with conversational sidebar and active agent status",
       caption:
-        "Voice-ready entry points sit alongside structured selection—users choose how to proceed.",
+        "Agent mode drafts structured enterprise configuration—the user reviews every field before anything is saved.",
     },
   },
   intent: {
@@ -205,10 +205,10 @@ export const fedexAiConciergeStory: FedExStory = {
       },
     ],
     visual: {
-      src: `${imageBase}/review-confirm.png`,
-      alt: "FedEx review and confirm screen with structured account data and Ask FedEx sidebar showing agent mode activity",
+      src: `${imageBase}/step-selection.png`,
+      alt: "Ask FedEx tailoring onboarding steps based on business account selection with AI-guided path indicators",
       caption:
-        "AI-gathered configuration rendered as editable structure—nothing ships without review.",
+        "A single intent—open a business account—reshapes the entire configuration path and prefilled data scope.",
     },
     caption:
       "Nothing becomes operational until the human-readable draft is accepted.",
@@ -226,10 +226,10 @@ export const fedexAiConciergeStory: FedExStory = {
       "Preserve clear points for human review and control",
     ],
     visual: {
-      src: `${imageBase}/agent-mode-setup.png`,
-      alt: "Ask FedEx in agent mode configuring a business account with structured onboarding steps visible",
+      src: `${imageBase}/onboarding-hero.png`,
+      alt: "Ask FedEx AI account assistant introducing a guided three-minute onboarding path with progress stepper and account type selection",
       caption:
-        "Agent mode drafts and queues steps—the user always sees what is planned before submission.",
+        "Felix frames the work upfront—scope, time, and what the system will handle—before asking for commitment.",
     },
     caption:
       "Users perceive one partner. The system coordinates capabilities behind that relationship.",

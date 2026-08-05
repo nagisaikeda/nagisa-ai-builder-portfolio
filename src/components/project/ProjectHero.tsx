@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import type { CaseStudy } from "@/lib/case-studies/types";
+import { CASE_STUDY_HERO_IMAGE_SIZES } from "@/lib/image-sizes";
 import { staggerContainer, staggerItem } from "@/lib/motion";
 
 type ProjectHeroProps = Pick<
@@ -130,7 +131,8 @@ export function ProjectHero({
                 fill
                 className="object-cover object-top"
                 priority
-                sizes="(max-width: 1120px) 100vw, 1120px"
+                quality={90}
+                sizes={CASE_STUDY_HERO_IMAGE_SIZES}
               />
             </div>
           </motion.div>

@@ -41,6 +41,7 @@ export function ProjectScreenshots({
                   alt={shot.alt}
                   fill
                   className="object-cover object-top"
+                  quality={90}
                   sizes="(max-width: 768px) 100vw, 544px"
                 />
               ) : (

@@ -1,5 +1,6 @@
 import { SharpImage } from "@/components/ui/SharpImage";
 import type { FedExVisual } from "@/lib/case-studies/fedex/types";
+import { CASE_STUDY_HERO_IMAGE_SIZES } from "@/lib/image-sizes";
 
 export function FedExStoryImage({
   visual,
@@ -7,7 +8,7 @@ export function FedExStoryImage({
   aspect = "aspect-[16/9]",
   dark = false,
   priority = false,
-  sizes = "(max-width: 1120px) 100vw, 1120px",
+  sizes = CASE_STUDY_HERO_IMAGE_SIZES,
 }: {
   visual: FedExVisual;
   className?: string;
@@ -23,12 +24,13 @@ export function FedExStoryImage({
           dark ? "border-white/10" : "border-border"
         }`}
       >
+        {/* High-resolution source assets are required for Retina displays; Next.js optimization cannot upscale beyond the source dimensions. */}
         <SharpImage
           src={visual.src}
           alt={visual.alt}
           fill
           priority={priority}
-          unoptimized
+          quality={90}
           className="object-cover object-top"
           sizes={sizes}
         />

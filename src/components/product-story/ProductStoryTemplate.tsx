@@ -271,6 +271,7 @@ export function ProductStoryTemplate({ story }: { story: ProductStory }) {
                         alt={feature.imageAlt ?? feature.title}
                         fill
                         className="object-cover object-top"
+                        quality={90}
                         sizes="(max-width: 1024px) 100vw, 720px"
                       />
                     ) : null}
