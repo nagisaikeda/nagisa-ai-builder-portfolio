@@ -56,6 +56,13 @@ export type FedExStory = {
     heading: string;
     items: readonly FedExCard[];
   };
+  onboardingFlow: {
+    heading: string;
+    intro: string;
+    video: string;
+    poster?: string;
+    caption: string;
+  };
   multimodal: {
     heading: string;
     intro: string;

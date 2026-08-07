@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { AssetPlaceholder } from "@/components/fedex-story/AssetPlaceholder";
 import { ConceptualFlow } from "@/components/fedex-story/ConceptualFlow";
 import { FedExStoryImage } from "@/components/fedex-story/FedExStoryImage";
+import { FedExStoryVideo } from "@/components/fedex-story/FedExStoryVideo";
 import { Button } from "@/components/ui/Button";
 import type { FedExStory } from "@/lib/case-studies/fedex/types";
 import { fadeUp, staggerContainer, staggerItem } from "@/lib/motion";
@@ -126,12 +127,15 @@ export function FedExStoryTemplate({ story }: { story: FedExStory }) {
           </motion.div>
 
           <motion.div variants={staggerItem} className="mt-10">
-            <FedExStoryImage
-              visual={story.hero}
-              aspect="aspect-[16/9]"
-              className="min-h-[240px] md:min-h-[380px]"
-              priority
+            <FedExStoryVideo
+              src={story.onboardingFlow.video}
+              poster={story.onboardingFlow.poster}
+              ariaLabel="FedEx AI Concierge complete onboarding flow demonstration"
+              className="min-h-[240px] md:min-h-[420px]"
             />
+            <p className="mt-4 max-w-2xl text-[0.9375rem] leading-relaxed text-body">
+              {story.onboardingFlow.caption}
+            </p>
           </motion.div>
         </motion.div>
       </section>
@@ -232,7 +236,7 @@ export function FedExStoryTemplate({ story }: { story: FedExStory }) {
       </SectionShell>
 
       {/* 4. Multimodal model */}
-      <SectionShell className="bg-canvas-warm/35">
+      <SectionShell>
         <motion.div
           initial="hidden"
           whileInView="visible"

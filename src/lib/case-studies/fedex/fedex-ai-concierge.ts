@@ -96,6 +96,15 @@ export const fedexAiConciergeStory: FedExStory = {
       },
     ],
   },
+  onboardingFlow: {
+    heading: "The complete onboarding flow",
+    intro:
+      "From first intent to structured configuration—the full experience shows how voice, chat, agent mode, and editable controls work as one system.",
+    video: "/videos/projects/fedex-ai-concierge/onboarding-flow.mp4",
+    poster: `${imageBase}/onboarding-hero.png`,
+    caption:
+      "End-to-end walkthrough: multimodal input, intent translation, agent orchestration, and human review in a single onboarding session.",
+  },
   multimodal: {
     heading: "Multimodal interaction model",
     intro:
