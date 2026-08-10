@@ -38,11 +38,13 @@ export const site = {
   name: "Nagisa Ikeda",
   role: "AI Design Engineer",
   headline:
-    "Building Enterprise AI, shipping AI products, and designing AI-native systems.",
+    "AI Design Engineer building AI products from idea to production.",
+  subheadline:
+    "Enterprise AI • Multi-agent Systems • Design Engineering • AI-native Design Systems",
   credibility: [
     "AI Design Engineer @ FedEx Dataworks",
     "Founder @ Nara Labs",
-    "2nd Place — YC AI Growth Hackathon",
+    "2nd Place – YC AI Growth Hackathon",
   ],
   email: "hello@nagisaikeda.com",
   linkedin: "https://www.linkedin.com/in/nagisaikeda/",

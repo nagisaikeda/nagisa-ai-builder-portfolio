@@ -20,9 +20,13 @@ export function Hero() {
             {site.headline}
           </motion.h1>
 
+          <motion.p variants={staggerItem} className="mt-7 text-mono-sm">
+            {site.subheadline}
+          </motion.p>
+
           <motion.div
             variants={staggerItem}
-            className="mt-7 space-y-1 text-mono-sm"
+            className="mt-4 space-y-1 text-mono-sm"
           >
             {site.credibility.map((line) => (
               <p key={line}>{line}</p>
