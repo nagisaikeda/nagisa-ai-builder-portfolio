@@ -119,6 +119,7 @@ export const featuredWork = {
       ],
       cta: "View case study",
       href: "/projects/fedex-ai-concierge",
+      passwordProtected: true,
       image: "/images/projects/fedex-ai-concierge/agent-mode.png",
       imageAnchor: "left",
       imageSizes: "(max-width: 1024px) 100vw, 60vw",

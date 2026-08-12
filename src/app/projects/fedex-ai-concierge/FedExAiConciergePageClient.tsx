@@ -2,24 +2,24 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { FedExStoryTemplate } from "@/components/fedex-story/FedExStoryTemplate";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { PasswordGateModal } from "@/components/PasswordGateModal";
-import { ProductStoryTemplate } from "@/components/product-story/ProductStoryTemplate";
+import { fedexAiConciergeStory } from "@/lib/case-studies/fedex/fedex-ai-concierge";
 import {
-  CONNECTED_WEALTH_PASSWORD,
-  grantConnectedWealthAccess,
-  hasConnectedWealthAccess,
-} from "@/lib/connected-wealth-access";
-import { connectedWealthStory } from "@/lib/case-studies/connected-wealth";
+  FEDEX_AI_CONCIERGE_PASSWORD,
+  grantFedExAiConciergeAccess,
+  hasFedExAiConciergeAccess,
+} from "@/lib/fedex-ai-concierge-access";
 
-export function ConnectedWealthPageClient() {
+export function FedExAiConciergePageClient() {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    setAuthorized(hasConnectedWealthAccess());
+    setAuthorized(hasFedExAiConciergeAccess());
     setReady(true);
   }, []);
 
@@ -39,12 +39,13 @@ export function ConnectedWealthPageClient() {
         <Footer />
         <PasswordGateModal
           open
-          password={CONNECTED_WEALTH_PASSWORD}
-          onClose={() => router.push("/#product-design")}
+          password={FEDEX_AI_CONCIERGE_PASSWORD}
+          onClose={() => router.push("/#ai-products")}
           onSuccess={() => {
-            grantConnectedWealthAccess();
+            grantFedExAiConciergeAccess();
             setAuthorized(true);
           }}
+          title={fedexAiConciergeStory.title}
         />
       </>
     );
@@ -54,7 +55,7 @@ export function ConnectedWealthPageClient() {
     <>
       <Header />
       <main className="mx-auto max-w-[1120px] px-6 md:px-8">
-        <ProductStoryTemplate story={connectedWealthStory} />
+        <FedExStoryTemplate story={fedexAiConciergeStory} />
       </main>
       <Footer />
     </>

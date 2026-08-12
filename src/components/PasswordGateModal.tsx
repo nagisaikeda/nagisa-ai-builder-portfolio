@@ -8,6 +8,8 @@ type PasswordGateModalProps = {
   onClose: () => void;
   onSuccess: () => void;
   title?: string;
+  /** Expected passcode. Defaults to the Connected Wealth passcode for backwards compatibility. */
+  password?: string;
 };
 
 export function PasswordGateModal({
@@ -15,6 +17,7 @@ export function PasswordGateModal({
   onClose,
   onSuccess,
   title = "Connected Wealth",
+  password: expectedPassword = CONNECTED_WEALTH_PASSWORD,
 }: PasswordGateModalProps) {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -52,7 +55,7 @@ export function PasswordGateModal({
 
   function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    if (password === CONNECTED_WEALTH_PASSWORD) {
+    if (password === expectedPassword) {
       setError("");
       onSuccess();
       return;

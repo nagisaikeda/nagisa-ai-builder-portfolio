@@ -9,7 +9,11 @@ import { CardVideoGallery } from "@/components/CardVideoGallery";
 import { PasswordGateModal } from "@/components/PasswordGateModal";
 import { ProductMockup } from "@/components/ProductMockups";
 import { Section, SectionHeader } from "@/components/ui/Section";
-import { grantConnectedWealthAccess } from "@/lib/connected-wealth-access";
+import { CONNECTED_WEALTH_PASSWORD, grantConnectedWealthAccess } from "@/lib/connected-wealth-access";
+import {
+  FEDEX_AI_CONCIERGE_PASSWORD,
+  grantFedExAiConciergeAccess,
+} from "@/lib/fedex-ai-concierge-access";
 import type { WorkItem } from "@/lib/data";
 import {
   COMPACT_CARD_IMAGE_SIZES,
@@ -371,6 +375,12 @@ function ShowcaseCard({
   );
 
   if (project.href && project.passwordProtected) {
+    const href = project.href;
+    const isFedEx = href.includes("fedex-ai-concierge");
+    const expectedPassword = isFedEx
+      ? FEDEX_AI_CONCIERGE_PASSWORD
+      : CONNECTED_WEALTH_PASSWORD;
+
     return (
       <>
         <button
@@ -384,11 +394,16 @@ function ShowcaseCard({
         </button>
         <PasswordGateModal
           open={gateOpen}
+          password={expectedPassword}
           onClose={() => setGateOpen(false)}
           onSuccess={() => {
-            grantConnectedWealthAccess();
+            if (isFedEx) {
+              grantFedExAiConciergeAccess();
+            } else {
+              grantConnectedWealthAccess();
+            }
             setGateOpen(false);
-            router.push(project.href!);
+            router.push(href);
           }}
           title={project.title}
         />
