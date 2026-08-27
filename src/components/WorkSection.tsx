@@ -71,6 +71,22 @@ function MediaFrame({
   );
 }
 
+function PlaceholderCardMedia({
+  label,
+  compact,
+}: {
+  label: string;
+  compact?: boolean;
+}) {
+  return (
+    <MediaFrame compact={compact} featured={!compact}>
+      <div className="flex h-full w-full items-center justify-center bg-canvas px-6">
+        <p className="text-center text-sm text-muted">{label}</p>
+      </div>
+    </MediaFrame>
+  );
+}
+
 function EditorialCardMedia({ project }: { project: WorkItem }) {
   const objectClass = `h-full w-full max-w-full ${mediaObjectClass(project)}`;
 
@@ -133,6 +149,10 @@ function EditorialCardMedia({ project }: { project: WorkItem }) {
     );
   }
 
+  if (project.mediaPlaceholder) {
+    return <PlaceholderCardMedia label={project.mediaPlaceholder} />;
+  }
+
   return null;
 }
 
@@ -160,6 +180,18 @@ function SystemsCardMedia({ project }: { project: WorkItem }) {
       <div className="relative aspect-[16/10] min-h-[240px] w-full overflow-hidden bg-canvas-warm md:min-h-[280px]">
         <div className="flex h-full w-full items-center justify-center p-6">
           <ProductMockup id={project.mockup} />
+        </div>
+      </div>
+    );
+  }
+
+  if (project.mediaPlaceholder) {
+    return (
+      <div className="relative aspect-[16/10] min-h-[240px] w-full overflow-hidden bg-canvas md:min-h-[280px]">
+        <div className="flex h-full w-full items-center justify-center px-6">
+          <p className="text-center text-sm text-muted">
+            {project.mediaPlaceholder}
+          </p>
         </div>
       </div>
     );
@@ -226,6 +258,12 @@ function CompactCardMedia({ project }: { project: WorkItem }) {
           <ProductMockup id={project.mockup} />
         </div>
       </MediaFrame>
+    );
+  }
+
+  if (project.mediaPlaceholder) {
+    return (
+      <PlaceholderCardMedia label={project.mediaPlaceholder} compact />
     );
   }
 

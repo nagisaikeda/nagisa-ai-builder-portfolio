@@ -18,6 +18,7 @@ export type WorkItem = {
   meta?: string;
   cta?: string;
   href: string | null;
+  mediaPlaceholder?: string;
   image?: string | null;
   imagePosition?: "center" | "right";
   imageAnchor?: "center" | "left";
@@ -121,6 +122,24 @@ export const featuredWork = {
       href: "/projects/fedex-ai-concierge",
       passwordProtected: true,
       image: "/images/projects/fedex-ai-concierge/agent-mode.png",
+      imageAnchor: "left",
+      imageSizes: "(max-width: 1024px) 100vw, 60vw",
+      tint: "#f3f2ef",
+    },
+    {
+      title: "FedEx Global Reporting",
+      category: "Enterprise AI · Coming Soon",
+      description:
+        "AI-native decision intelligence that transforms fragmented enterprise reporting into proactive, agent-assisted workflows—from detecting what needs attention to investigating, acting, and continuously monitoring outcomes.",
+      tags: [
+        "Ambient intelligence",
+        "Agentic workflows",
+        "Decision intelligence",
+        "Human-in-the-loop",
+      ],
+      cta: "Case study coming soon",
+      href: null,
+      image: "/images/projects/fedex-global-reporting/dashboard.jpg",
       imageAnchor: "left",
       imageSizes: "(max-width: 1024px) 100vw, 60vw",
       tint: "#f3f2ef",

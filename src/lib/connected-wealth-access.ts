@@ -1,6 +1,6 @@
 export const CONNECTED_WEALTH_ACCESS_KEY = "connected-wealth-access";
 
-export const CONNECTED_WEALTH_PASSWORD = "8888";
+export const CONNECTED_WEALTH_PASSWORD = "6666";
 
 export function hasConnectedWealthAccess(): boolean {
   if (typeof window === "undefined") return false;
