@@ -506,7 +506,9 @@ export function WorkSection({
               : "mt-14 flex min-w-0 flex-col gap-8 md:gap-10"
         }
       >
-        {items.map((project) => (
+        {items
+          .filter((project) => !project.hidden)
+          .map((project) => (
           <motion.div
             key={project.title}
             variants={staggerItem}

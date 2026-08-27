@@ -18,6 +18,7 @@ export type WorkItem = {
   meta?: string;
   cta?: string;
   href: string | null;
+  hidden?: boolean;
   mediaPlaceholder?: string;
   image?: string | null;
   imagePosition?: "center" | "right";
@@ -139,6 +140,7 @@ export const featuredWork = {
       ],
       cta: "Case study coming soon",
       href: null,
+      hidden: true,
       image: "/images/projects/fedex-global-reporting/dashboard.jpg",
       imageAnchor: "left",
       imageSizes: "(max-width: 1024px) 100vw, 60vw",
